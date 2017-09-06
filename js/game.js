@@ -6,6 +6,7 @@ var bgReady = false;
 var bgImage = new Image();
 bgImage.onload = function () {
 	bgReady = true;
+	tryToStarGame();
 };
 bgImage.src = "./src/background.png";
 
@@ -13,6 +14,7 @@ var monsterReady = false;
 var monsterImage = new Image();
 monsterImage.onload = function () {
 	monsterReady = true;
+	tryToStarGame();
 };
 monsterImage.src = "./src/pinkMonster.png";
 
@@ -33,7 +35,7 @@ addEventListener("keyup", function (e) {
 
 var reset = function () {
 	monster.x = canvas.width / 2;
-	monster.y = canvas.height / 2;
+	monster.y = canvas.height - monsterImage.height;
 
 };
 
@@ -74,5 +76,9 @@ var w = window;
 requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
 
 var then = Date.now();
-reset();
-main();
+var tryToStarGame = function() {
+	if (monsterReady && bgReady) {
+	reset();
+	main();
+	}; 
+}
