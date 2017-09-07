@@ -68,10 +68,21 @@ var addNewHint = function() {
 
 var update = function(modifier) {
   if (37 in keysDown) {
-    monster.x -= monster.speed * modifier;
+	var newXLeft = monster.x - monster.speed * modifier;
+	 if (newXLeft < 0) {
+		 monster.x = 0;
+	 } else { 
+		 monster.x = newXLeft;
+	 }
   }
   if (39 in keysDown) {
-    monster.x += monster.speed * modifier;
+	  var newXRight = monster.x + monster.speed * modifier;
+		if (newXRight > (canvas.width - monsterImage.width)) {
+			monster.x = canvas.width - monsterImage.width;
+		} else {
+			monster.x = newXRight;
+		}
+    
   }
 
   var hint = {};
