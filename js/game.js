@@ -5,7 +5,7 @@ var bgReady = false;
 var bgImage = new Image();
 bgImage.onload = function() {
   bgReady = true;
-  tryToStarGame();
+  tryToStartGame();
 };
 bgImage.src = "./src/background.png";
 
@@ -13,7 +13,7 @@ var monsterReady = false;
 var monsterImage = new Image();
 monsterImage.onload = function() {
   monsterReady = true;
-  tryToStarGame();
+  tryToStartGame();
 };
 monsterImage.src = "./src/pinkMonster.png";
 
@@ -21,7 +21,7 @@ var hintReady = false;
 var hintImage = new Image();
 hintImage.onload = function() {
   hintReady = true;
-  tryToStarGame();
+  tryToStartGame();
 };
 hintImage.src = "./src/music.png";
 
@@ -31,7 +31,7 @@ var monster = {
 
 
 var hints = [];
-var hintCaught = 0;
+var hintsCaught = 0;
 
 var keysDown = {};
 
@@ -63,7 +63,7 @@ var addNewHint = function() {
 	hint.x = Math.random() * (canvas.width - hintImage.width);
   	hint.y = -hintImage.height;
 	hints.push(hint)
-	setTimeout(addNewHint, 300 + Math.random() * 3000);
+	setTimeout(addNewHint, 500 + Math.random() * 4000);
 };
 
 var update = function(modifier) {
@@ -73,6 +73,12 @@ var update = function(modifier) {
   if (39 in keysDown) {
     monster.x += monster.speed * modifier;
   }
+
+  var hint = {};
+  hint.x = Math.random() * (canvas.width - hintImage.width);
+  hint.y = -hintImage.height;
+
+  detectCollision();
 };
 
 var render = function() {
@@ -90,6 +96,11 @@ var render = function() {
 		ctx.drawImage(hintImage, hint.x, hint.y);
 	  }
   }
+	ctx.fillStyle = "rgb(0, 0, 0)";
+	ctx.font = "24px Helvetica";
+	ctx.textAlign = "left";
+	ctx.textBaseline = "top";
+	ctx.fillText("Hints caught: " + hintsCaught, 20, 20);
 };
 
 var moveHintDown = function() {
@@ -98,6 +109,23 @@ var moveHintDown = function() {
 		hint.y = hint.y + 1;;
 	}
 };
+
+var detectCollision = function() {
+	for ( i = 0; i < hints.length; i++ ) {
+		var hint = hints[i]; 
+		if (
+			monster.x <= hint.x + hintImage.width
+			&& hint.x <= monster.x + monsterImage.width
+			&& monster.y <= hint.y + hintImage.height
+			&& hint.y <= monster.y + monsterImage.height
+	) {
+		++hintsCaught;
+		hints.splice(i, 1);
+	  }
+	}
+};
+
+
 var main = function() {
   var now = Date.now();
   var delta = now - then;
@@ -119,7 +147,7 @@ requestAnimationFrame =
   w.mozRequestAnimationFrame;
 
 var then = Date.now();
-var tryToStarGame = function() {
+var tryToStartGame = function() {
   if (monsterReady && bgReady && hintReady) {
     reset();
     main();
