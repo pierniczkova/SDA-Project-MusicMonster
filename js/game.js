@@ -59,11 +59,11 @@ var reset = function() {
 };
 
 var addNewHint = function() {
-	var hint = {};
-	hint.x = Math.random() * (canvas.width - hintImage.width);
-  	hint.y = -hintImage.height;
-	hints.push(hint)
-	setTimeout(addNewHint, 500 + Math.random() * 4000);
+  var hint = {};
+  hint.x = Math.random() * (canvas.width - hintImage.width);
+  hint.y = -hintImage.height;
+  hints.push(hint)
+  setTimeout(addNewHint, 500 + Math.random() * 4000);
 };
 
 var update = function(modifier) {
@@ -81,9 +81,8 @@ var update = function(modifier) {
 			monster.x = canvas.width - monsterImage.width;
 		} else {
 			monster.x = newXRight;
-		}
-    
-  }
+			}
+  	}
 
   var hint = {};
   hint.x = Math.random() * (canvas.width - hintImage.width);
@@ -115,20 +114,20 @@ var render = function() {
 };
 
 var moveHintDown = function() {
-	for ( i = 0; i < hints.length; i++ ) {
-		var hint = hints[i];
-		hint.y = hint.y + 1;;
+  for ( i = 0; i < hints.length; i++ ) {
+	var hint = hints[i];
+	hint.y = hint.y + 1;;
 	}
 };
 
 var detectCollision = function() {
-	for ( i = 0; i < hints.length; i++ ) {
-		var hint = hints[i]; 
-		if (
-			monster.x <= hint.x + hintImage.width
-			&& hint.x <= monster.x + monsterImage.width
-			&& monster.y <= hint.y + hintImage.height
-			&& hint.y <= monster.y + monsterImage.height
+  for ( i = 0; i < hints.length; i++ ) {
+	var hint = hints[i]; 
+	if (
+		monster.x <= hint.x + hintImage.width
+		&& hint.x <= monster.x + monsterImage.width
+		&& monster.y <= hint.y + hintImage.height
+		&& hint.y <= monster.y + monsterImage.height
 	) {
 		++hintsCaught;
 		hints.splice(i, 1);
@@ -152,7 +151,7 @@ var main = function() {
 
 var w = window;
 requestAnimationFrame =
-  w.requestAnimationFrame ||
+  w.requestAnimationFrame || 
   w.webkitRequestAnimationFrame ||
   w.msRequestAnimationFrame ||
   w.mozRequestAnimationFrame;
