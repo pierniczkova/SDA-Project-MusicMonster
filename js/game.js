@@ -15,7 +15,7 @@ monsterImage.onload = function() {
   monsterReady = true;
   tryToStartGame();
 };
-monsterImage.src = "./src/pinkMonster.png";
+monsterImage.src = "./src/monsterrr.png";
 
 var hintReady = false;
 var hintImage = new Image();
@@ -23,7 +23,7 @@ hintImage.onload = function() {
   hintReady = true;
   tryToStartGame();
 };
-hintImage.src = "./src/music.png";
+hintImage.src = "./src/mellody.png";
 
 var monster = {
   speed: 256
@@ -106,11 +106,11 @@ var render = function() {
 		ctx.drawImage(hintImage, hint.x, hint.y);
 	  }
   }
-	ctx.fillStyle = "rgb(0, 0, 0)";
+	ctx.fillStyle = "rgb(250, 250, 250)";
 	ctx.font = "24px Helvetica";
 	ctx.textAlign = "left";
 	ctx.textBaseline = "top";
-	ctx.fillText("Hints caught: " + hintsCaught, 20, 20);
+	ctx.fillText("Score: " + hintsCaught, 20, 20);
 };
 
 var moveHintDown = function() {
