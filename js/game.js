@@ -63,7 +63,7 @@ var addNewHint = function() {
   hint.x = Math.random() * (canvas.width - hintImage.width);
   hint.y = -hintImage.height;
   hints.push(hint)
-  setTimeout(addNewHint, 500 + Math.random() * 4000);
+  setTimeout(addNewHint, 500 + Math.random() * 3000);
 };
 
 var update = function(modifier) {
@@ -113,6 +113,25 @@ var render = function() {
 	ctx.fillText("Score: " + hintsCaught, 20, 20);
 };
 
+  var gameStarted = false;
+  document.getElementById("starter").disabled = false;
+  var intervalId = null;
+  function start() {
+    intervalId = setInterval(changeValue, 1000);
+	gameStarted = true;
+	document.getElementById("starter").disabled = true;
+	} 
+  var secs = 30;
+  function changeValue() {
+    document.getElementById("finalCountDown").innerHTML = "0 : " +secs ;
+    secs--
+	  if (secs < 0) {
+		clearInterval (intervalId);
+		gameStarted = false;
+		setTimeout(alert, 100, 'Game over! Your score: ' + hintsCaught + ' tones catched :) Congrats!');
+	}
+};
+
 var moveHintDown = function() {
   for ( i = 0; i < hints.length; i++ ) {
 	var hint = hints[i];
@@ -139,8 +158,10 @@ var detectCollision = function() {
 var main = function() {
   var now = Date.now();
   var delta = now - then;
-  moveHintDown();
-
+  if (gameStarted) {
+	  moveHintDown();
+  }
+  
   update(delta / 1000);
   render();
 
