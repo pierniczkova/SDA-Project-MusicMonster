@@ -10,20 +10,27 @@
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-        <div class="container">
+        
             <div class="header">MUSIC MONSTER</div>
-            <div class="circle-wrapper">
-                <div class="circle"></div>
+            <div class="wrapper">
+            <div class="column vinyl">
+            <div id="vinyl">
             </div>
+            </div>
+            <div class="column timer">
             <p class="gameTime">GAME TIME</p>
-            <p id="finalCountDown">0 : 30</p>
-            <button id="starter" onclick="start()">Start time</button>
+            <p id="finalCountDown"></p>
+            <button id="starter" onclick="start()">Let the music play</button>
+            </div>
+            </div>
+            <div class="row-game">
             <div class="game-background">
                 <canvas id="myCanvas" width="540" height="480">
             <script src="js/game.js"></script>
                 </canvas>
             </div>
             </div>
-            
+            <script src="js/script.js"></script>
+            <embed src="src/Tigerskin - This place is empty without you (Original MIX).mp3" width="180" height="90" loop="false" autostart="false" hidden="true" />
     </body>
 </html>

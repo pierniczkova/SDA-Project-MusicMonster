@@ -29,10 +29,8 @@ var monster = {
   speed: 256
 };
 
-
 var hints = [];
 var hintsCaught = 0;
-
 var keysDown = {};
 
 addEventListener(
@@ -63,7 +61,7 @@ var addNewHint = function() {
   hint.x = Math.random() * (canvas.width - hintImage.width);
   hint.y = -hintImage.height;
   hints.push(hint)
-  setTimeout(addNewHint, 500 + Math.random() * 3000);
+  setTimeout(addNewHint, 500 + Math.random() * 4000);
 };
 
 var update = function(modifier) {
@@ -114,28 +112,36 @@ var render = function() {
 };
 
   var gameStarted = false;
-  document.getElementById("starter").disabled = false;
   var intervalId = null;
   function start() {
     intervalId = setInterval(changeValue, 1000);
 	gameStarted = true;
 	document.getElementById("starter").disabled = true;
 	} 
-  var secs = 30;
+
+  var sec = 10;
+  document.getElementById("finalCountDown").innerHTML = "0 : " +sec;
+  var finish = function () {
+		setTimeout(alert, 0, 'Game over! Your score: ' + hintsCaught + ' tones catched :) Congrats!');
+	};
   function changeValue() {
-    document.getElementById("finalCountDown").innerHTML = "0 : " +secs ;
-    secs--
-	  if (secs < 0) {
+	sec--
+	document.getElementById("finalCountDown").innerHTML = "0 : " +sec ;
+	  if (sec < 0) {
 		clearInterval (intervalId);
 		gameStarted = false;
-		setTimeout(alert, 100, 'Game over! Your score: ' + hintsCaught + ' tones catched :) Congrats!');
+		finish();
+		setTimeout(document.getElementById("starter").disabled = false);
+		sec = 10;
+		document.getElementById("finalCountDown").innerHTML = "0 : " +sec;	
 	}
+	
 };
 
 var moveHintDown = function() {
   for ( i = 0; i < hints.length; i++ ) {
 	var hint = hints[i];
-	hint.y = hint.y + 1;;
+	hint.y = hint.y + 1;
 	}
 };
 
