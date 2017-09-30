@@ -8,29 +8,35 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Agnieszka Olech">
         <link rel="stylesheet" type="text/css" href="style.css">
+         <script
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+            crossorigin="anonymous"></script>
+        <script src="js/script.js"></script> 
+        <link href="https://fonts.googleapis.com/css?family=Sigmar+One" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Imprima" rel="stylesheet">
     </head>
     <body>
         
             <div class="header">MUSIC MONSTER</div>
             <div class="wrapper">
-            <div class="column vinyl">
-            <div id="vinyl">
-            </div>
-            </div>
             <div class="column timer">
             <p class="gameTime">GAME TIME</p>
             <p id="finalCountDown"></p>
             <button id="starter" onclick="start()">Let the music play</button>
             </div>
+
+            <audio src="src/use_me_again_original_mix.mp3" id="audio"></audio>
+            <div class="glyphicon glyphicon-play-circle b-play" id="play" onclick="play()"></div>
+
+            
             </div>
             <div class="row-game">
             <div class="game-background">
                 <canvas id="myCanvas" width="540" height="480">
-            <script src="js/game.js"></script>
                 </canvas>
             </div>
             </div>
-            <script src="js/script.js"></script>
-            <embed src="src/Tigerskin - This place is empty without you (Original MIX).mp3" width="180" height="90" loop="false" autostart="false" hidden="true" />
+            <script src="js/game.js"></script>
     </body>
 </html>
